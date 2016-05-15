@@ -1,0 +1,50 @@
+/* ***************************************************************
+* Program Name :Manthan, Codefest 16	
+* Date:Feb 26,2016
+* Author:Mahmoud Ismail
+*Copyright:Your copyright notice
+***************************************** *******************/
+#define _CRT_SECURE_NO_WARNINGS 
+//#include<bits/stdc++.h>
+#include<stdio.h>
+#include<sstream>
+#include <stdlib.h> 
+#include<iostream>
+#include<string>
+#include<algorithm>
+#include <limits>
+#include<queue>
+#include<vector>
+#include<set>
+#include <cstdio>
+#include <cstring>
+#include<map>
+#include<cmath>
+#include<climits>
+#include<iomanip>
+#include<utility>
+#include<set>
+#include<iterator>
+using namespace std;
+int main() {
+	
+	int a,b,t,c=1;
+	scanf("%d", &t);
+	while (t--)
+	{
+		
+		scanf("%d%d", &a, &b);
+		int sum = 0;
+		for (int i = a; i <= b; i++)
+		{
+			if (i & 1)
+				sum+=i;
+		}
+
+		printf("Case %d: %d\n", c++, sum);
+
+	}
+
+	return 0;
+}
+
