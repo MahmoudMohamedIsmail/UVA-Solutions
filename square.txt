@@ -1,6 +1,6 @@
 /* ***************************************************************
- * Program Name : test
- * Date:  4, 2016
+ * Program Name : 10364 - Square 
+ * Date:  5,16,2016
  * Author: Mahmoud Ismail
  *Copyright: Your copyright notice
  ***************************************** *******************/
@@ -26,53 +26,27 @@
 using namespace std;
 int vis[21];
 vector<int> v;
-bool check(int n, int a, int b, int c, int d) {
-
-	if (a == b && b == c && c == d && a != 0) {
+bool check(int n, int sum, int len, int num,int start) {
+	if (num == 4) {
 		return true;
 	}
-
-	bool f = false;
-	for (int i = 0; i < n; i++) {
-		if (vis[i] != 1) {
-			vis[i] = 1;
-			a += v[i];
-			f = check(n, a, b, c, d);
-			vis[i] = 0;
-			a -= v[i];
+	if (len == sum) {
+		if (check(n, 0, len, num + 1,0)) {
+			return true;
 		}
-		if (f == true)
-					return true;
-		if (vis[i] != 1) {
-			vis[i] = 1;
-			b += v[i];
-			f = check(n, a, b, c, d);
-			vis[i] = 0;
-			b -= v[i];
-		}if (f == true)
-			return true;
-		if (vis[i] != 1) {
-			vis[i] = 1;
-			c += v[i];
-			f = check(n, a, b, c, d);
-			vis[i] = 0;
-			c -= v[i];
-		}if (f == true)
-			return true;
-		if (vis[i] != 1) {
-			vis[i] = 1;
-			d += v[i];
-			f = check(n, a, b, c, d);
-			vis[i] = 0;
-			d -= v[i];
-		}
-
-		if (f == true)
-			return true;
 	}
 
-		return false;
+	for (int i = start; i < n; i++) {
+		if (!vis[i] && sum + v[i] <= len) {
+			vis[i] = 1;
+			if (check(n, sum + v[i], len, num,i))
+				return true;
+			vis[i] = 0;
+		}
 
+	}
+
+	return false;
 
 }
 
@@ -87,17 +61,23 @@ int main() {
 		int n;
 		scanf("%d", &n);
 		v.resize(n);
+		int sum = 0;
 		memset(vis, 0, sizeof(vis));
 		for (int i = 0; i < n; i++) {
 			scanf("%d", &v[i]);
+			sum += v[i];
 		}
-
-		bool ans = check(n, 0, 0, 0, 0);
-
-		if (ans == true) {
-			printf("yes\n");
-		} else
+		if (sum % 4 != 0) {
 			printf("no\n");
+
+		} else {
+			sort(v.begin(),v.end());
+			bool ans = check(n, 0, sum / 4, 0,0);
+			if (ans == true) {
+				printf("yes\n");
+			} else
+				printf("no\n");
+		}
 	}
 	return 0;
 }
